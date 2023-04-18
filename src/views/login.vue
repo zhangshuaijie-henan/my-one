@@ -31,6 +31,9 @@
 
 <script>
 
+import {GetUserLogin, requestPost} from "../utils/api";
+import {al} from "../../dist/js/@vue/@vue.7f987c68";
+
 export default {
   name: "Login",
   data() {
@@ -51,30 +54,34 @@ export default {
     }
   },
   methods: {
-    updateVerifyCode() {
-      this.vcUrl = '/verifyCode?time='+new Date();
-    },
-    submitLogin() {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          this.loading = true;
-          this.postRequest('/doLogin', this.loginForm).then(resp => {
-            this.loading = false;
-            if (resp) {
-              this.$store.commit('INIT_CURRENTHR', resp.obj);
-              window.sessionStorage.setItem("user", JSON.stringify(resp.obj));
-              let path = this.$route.query.redirect;
-              this.$router.replace((path == '/' || path == undefined) ? '/home' : path);
-            }else{
-              this.vcUrl = '/verifyCode?time='+new Date();
-            }
-          })
-        } else {
-          return false;
-        }
-      });
-    }
-  }
+    // updateVerifyCode() {
+    //   this.vcUrl = '/verifyCode?time='+new Date();
+    // },
+    // submitLogin() {
+    //   this.$refs.loginForm.validate((valid) => {
+    //     if (valid) {
+    //       this.loading = true;
+    //       this.postRequest('/doLogin', this.loginForm).then(resp => {
+    //         this.loading = false;
+    //         if (resp) {
+    //           this.$store.commit('INIT_CURRENTHR', resp.obj);
+    //           window.sessionStorage.setItem("user", JSON.stringify(resp.obj));
+    //           let path = this.$route.query.redirect;
+    //           this.$router.replace((path == '/' || path == undefined) ? '/home' : path);
+    //         }else{
+    //           this.vcUrl = '/verifyCode?time='+new Date();
+    //         }
+    //       })
+    //     } else {
+    //       return false;
+    //     }
+    //   });
+    // }
+  },
+  async mounted() {
+    alert("11");
+    alert(requestPost("/login",null));
+  },
 }
 </script>
 

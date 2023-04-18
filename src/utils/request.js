@@ -5,6 +5,7 @@ import axios from 'axios'
 } from 'element-ui' */
 import router from '../router/index.js'
 
+axios.defaults.baseURL = '/api'
 
 // 请求拦截
 axios.interceptors.request.use(
@@ -13,7 +14,6 @@ axios.interceptors.request.use(
 		if (localStorage.Authorization) { //判断本地缓存的token是否存在
 			confing.headers.Authorization = localStorage.Authorization
 		}
-
 		return confing
 	},
 	(error) => { //token不存在，设置为网络报错

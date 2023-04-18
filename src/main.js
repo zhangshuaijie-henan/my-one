@@ -20,6 +20,7 @@ app.component('SvgIcon',SvgIcon)
 //定义全局的数据变量
 // Vue.prototype.$data = {};
 
+
 app.mount('#app')
 
 
